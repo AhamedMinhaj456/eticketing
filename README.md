@@ -80,7 +80,7 @@ kubectl -n eticketing create secret generic app-secrets \
 ```bash
 kubectl apply -f deploy/k8s/base/ingress-nginx-kind.yaml
 kubectl -n eticketing apply -f deploy/k8s/base/30-ingress.yaml
-kubectl -n ingress-nginx port-forward svc/ingress-nginx 18080:80
+kubectl -n ingress-nginx port-forward svc/ingress-nginx 8080:80
 ```
 
 Edit `/etc/hosts`:
@@ -88,10 +88,10 @@ Edit `/etc/hosts`:
 127.0.0.1 eticketing.local
 ```
 
-✅ **App UI** → [http://eticketing.local:18080/login.html](http://eticketing.local:18080/login.html)  
+✅ **App UI** → [http://eticketing.local:8080/login.html](http://eticketing.local:8080/login.html)  
 ✅ **Health check**:
 ```bash
-curl -i -H "Host: eticketing.local" http://127.0.0.1:18080/health
+curl -i -H "Host: eticketing.local" http://127.0.0.1:8080/health
 ```
 
 ---
