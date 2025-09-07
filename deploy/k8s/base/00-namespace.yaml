@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: eticketing
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: eticketing
+imagePullSecrets:
+  - name: ghcr-cred

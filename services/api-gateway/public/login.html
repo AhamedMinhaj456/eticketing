@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Login – RuhuTickets</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f7f7f8;
+      --panel: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --ring: #2563eb20;
+      --brand: #2563eb;
+      --brand-600:#1d4ed8;
+      --success:#0e9f6e;
+      --danger:#dc2626;
+      --card-radius: 14px;
+      --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.06);
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:#0b0d10;
+        --panel:#111317;
+        --text:#e5e7eb;
+        --muted:#9ca3af;
+        --border:#1f242b;
+        --ring:#3b82f620;
+        --brand:#3b82f6;
+        --brand-600:#2563eb;
+        --success:#10b981;
+        --danger:#ef4444;
+      }
+    }
+
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: radial-gradient(1200px 600px at 10% -10%, #2563eb0d, transparent 60%), var(--bg);
+      color: var(--text);
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 28px;
+      width: 340px;
+      box-shadow: var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+    h2 {
+      margin:0 0 8px 0;
+      font-size:1.4rem;
+      text-align:center;
+    }
+    .row { display:flex; flex-direction:column; gap:12px; }
+
+    input {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      font-size:1em;
+      outline:none;
+      box-shadow: var(--shadow-sm) inset;
+      transition:border-color .2s, box-shadow .2s;
+    }
+    input:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px var(--ring);
+    }
+    input::placeholder { color:var(--muted); }
+
+    button {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: none;
+      font-size:1em;
+      cursor:pointer;
+      background: linear-gradient(180deg, var(--brand), var(--brand-600));
+      color: #fff;
+      font-weight:500;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, transform .03s;
+    }
+    button:hover { box-shadow: var(--shadow); }
+    button:active { transform: translateY(1px); }
+
+    .err {
+      min-height:1.2em;
+      color: var(--danger);
+      font-size: .9em;
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Login to RuhuTickets</h2>
+    <div class="row">
+      <input id="username" placeholder="Username" autocomplete="username"/>
+      <input id="password" type="password" placeholder="Password" autocomplete="current-password"/>
+    </div>
+    <button id="btnLogin">Log In</button>
+    <div id="error" class="err"></div>
+  </div>
+
+  <script>
+    async function login() {
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value;
+      const errEl = document.getElementById('error');
+      errEl.textContent = '';
+      if (!u || !p) {
+        errEl.textContent = 'Both fields required';
+        return;
+      }
+      try {
+        const res = await fetch('/auth/login', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ username:u, password:p })
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(()=>({error:res.statusText}));
+          throw new Error(err.error||res.statusText);
+        }
+        const { token } = await res.json();
+        localStorage.setItem('jwt', token);
+        window.location.href = 'index.html';
+      } catch (e) {
+        errEl.textContent = e.message;
+      }
+    }
+
+    document.getElementById('btnLogin').onclick = login;
+    document.addEventListener('keypress', e=>{ if (e.key==='Enter') login(); });
+  </script>
+</body>
+</html>
