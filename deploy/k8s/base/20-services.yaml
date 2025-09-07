@@ -18,7 +18,7 @@ metadata:
   name: api-gateway
   namespace: eticketing
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: api-gateway
@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/hananr99/eticketing-api-gateway:latest
+          image: ghcr.io/ahamedminhaj456/eticketing-api-gateway:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -75,7 +75,7 @@ metadata:
   name: inventory
   namespace: eticketing
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: inventory
@@ -86,7 +86,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/hananr99/eticketing-inventory:latest
+          image: ghcr.io/ahamedminhaj456/eticketing-inventory:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -130,7 +130,7 @@ metadata:
   name: order
   namespace: eticketing
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: order
@@ -141,7 +141,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/hananr99/eticketing-order:latest
+          image: ghcr.io/ahamedminhaj456/eticketing-order:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -185,7 +185,7 @@ metadata:
   name: payment
   namespace: eticketing
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: payment
@@ -196,7 +196,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/hananr99/eticketing-payment:latest
+          image: ghcr.io/ahamedminhaj456/eticketing-payment:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -240,7 +240,7 @@ metadata:
   name: notification
   namespace: eticketing
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: notification
@@ -251,7 +251,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/hananr99/eticketing-notification:latest
+          image: ghcr.io/ahamedminhaj456/eticketing-notification:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

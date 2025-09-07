@@ -5,8 +5,8 @@ const secret = process.env.JWT_SECRET || 'dev-secret';
 const payload = {
   sub: 'demo-user',
   role,                    
-  iss: process.env.JWT_ISS || 'ruhutickets',
-  aud: process.env.JWT_AUD || 'ruhutickets-ui'
+  iss: process.env.JWT_ISS || 'eticketing',
+  aud: process.env.JWT_AUD || 'eticketing-ui'
 };
 const token = jwt.sign(payload, secret, { expiresIn: '8h' });
 console.log(token);

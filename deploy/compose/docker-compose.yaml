@@ -35,8 +35,8 @@ services:
     ports: ["8081:8080"]
     environment:
       JWT_SECRET: dev-secret
-      JWT_ISS: ruhutickets
-      JWT_AUD: ruhutickets-ui
+      JWT_ISS: eticketing
+      JWT_AUD: eticketing-ui
   inventory:
     build: ../../services/inventory
     env_file: ../../.env

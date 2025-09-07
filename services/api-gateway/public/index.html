@@ -2,677 +2,1679 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>RuhuTickets</title>
+  <title>E-Ticket Pro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg: #f7f7f8;
-      --panel: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --ring: #2563eb20;
-      --brand: #2563eb;
-      --brand-600:#1d4ed8;
-      --success:#0e9f6e;
-      --danger:#dc2626;
-      --card-radius: 14px;
-      --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.06);
-      --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
-      --table-stripe:#fafafa;
-      --tab-bg:#ffffff;
-      --tab-border:#e5e7eb;
-      --tab-active-bg:#111827;
-      --tab-active-fg:#ffffff;
-    }
-    @media (prefers-color-scheme: dark){
-      :root{
-        --bg:#0b0d10;
-        --panel:#111317;
-        --text:#e5e7eb;
-        --muted:#9ca3af;
-        --border:#1f242b;
-        --ring:#3b82f620;
-        --brand:#3b82f6;
-        --brand-600:#2563eb;
-        --success:#10b981;
-        --danger:#ef4444;
-        --table-stripe:#0f1216;
-        --tab-bg:#0e1115;
-        --tab-border:#1f242b;
-        --tab-active-bg:#e5e7eb;
-        --tab-active-fg:#0b0d10;
-      }
+    :root {
+      /* Sky Blue & Green Theme */
+      --primary: #0ea5e9;
+      --primary-hover: #0284c7;
+      --primary-light: #e0f2fe;
+      --primary-dark: #0369a1;
+      
+      --secondary: #10b981;
+      --secondary-hover: #059669;
+      --secondary-light: #d1fae5;
+      --secondary-dark: #047857;
+      
+      --accent: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-light: #cffafe;
+      
+      --success: #10b981;
+      --success-light: #d1fae5;
+      --danger: #ef4444;
+      --danger-light: #fee2e2;
+      --warning: #f59e0b;
+      --warning-light: #fef3c7;
+      
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+
+      --bg: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: linear-gradient(135deg, #e0f2fe 0%, #d1fae5 100%);
+      --text: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --border-light: #f1f5f9;
+      
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-lg: 28px;
+      --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.08);
+      --shadow: 0 4px 16px 0 rgba(15, 23, 42, 0.1);
+      --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, 0.15);
+      --shadow-xl: 0 20px 40px -10px rgba(15, 23, 42, 0.2);
     }
 
-    /* Base */
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
     body {
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
-      margin:0;
-      color:var(--text);
-      background:radial-gradient(1200px 600px at 10% -10%, #2563eb0d, transparent 60%), var(--bg);
+      background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 25%, #10b981 50%, #34d399 75%, #a7f3d0 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
     }
 
-    /* App Shell */
-    .container { max-width: 1400px; margin: 0 auto; padding: 12px; }
-    .topbar {
-      position: sticky; top: 0; z-index: 1000;
-      backdrop-filter: saturate(180%) blur(8px);
-      background: color-mix(in oklab, var(--panel) 88%, transparent);
-      border-bottom: 1px solid var(--border);
+    /* Animated background elements */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 10%, rgba(6, 182, 212, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(52, 211, 153, 0.1) 0%, transparent 40%);
+      z-index: -2;
+      animation: gentle-wave 20s ease-in-out infinite;
     }
-    .topbar__inner { max-width: 1200px; margin: 0 auto; padding: 14px 24px; display:flex; align-items:center; gap:16px; }
-    .brand { display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.2px; }
-    .brand__dot{ width:12px; height:12px; border-radius:50%; background: conic-gradient(from 0deg, var(--brand), var(--success)); box-shadow: 0 0 0 6px var(--ring); }
-    .brand small{ color:var(--muted); font-weight:500 }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 70% 20%, rgba(14, 165, 233, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 60%);
+      z-index: -1;
+      animation: gentle-wave 25s ease-in-out infinite reverse;
+    }
+
+    @keyframes gentle-wave {
+      0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+      33% { transform: translateY(-15px) rotate(1deg) scale(1.02); }
+      66% { transform: translateY(10px) rotate(-1deg) scale(0.98); }
+    }
+
+    /* Container */
+    .app-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 32px;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: var(--radius-lg);
+      padding: 28px 40px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-lg);
+      position: sticky;
+      top: 32px;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+
+    .header:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.75rem;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .brand-icon:hover {
+      transform: rotate(5deg) scale(1.05);
+    }
+
+    .brand-text h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+
+    .brand-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Navigation */
+    .nav-tabs {
+      display: flex;
+      background: var(--bg-secondary);
+      padding: 8px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-tab {
+      padding: 16px 24px;
+      border-radius: calc(var(--radius) - 8px);
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-tab::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .nav-tab:hover::before {
+      left: 100%;
+    }
+
+    .nav-tab:hover {
+      background: rgba(14, 165, 233, 0.1);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .nav-tab.active {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .nav-tab.active::before {
+      display: none;
+    }
 
     /* Buttons */
-    button {
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--panel);
-      color: var(--text);
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-weight: 600;
+      font-size: 0.9rem;
       cursor: pointer;
-      transition: transform .03s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: linear-gradient(135deg, var(--primary-hover), var(--primary));
+    }
+
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
     }
-    button:hover { box-shadow: var(--shadow); }
-    button:active { transform: translateY(1px); }
-    .btn-primary{
-      background: linear-gradient(180deg, var(--brand), var(--brand-600));
-      color: #fff;
-      border-color: transparent;
-    }
-    .btn-outline{
-      background: transparent;
-      border-color: var(--brand);
-      color: var(--brand);
-    }
-    .btn-danger{
-      border-color: color-mix(in oklab, var(--danger) 40%, var(--border));
-      color: var(--danger);
-      background: transparent;
+
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--bg-secondary);
+      border-color: var(--primary-light);
+      color: var(--primary);
     }
 
-    /* Inputs */
-    input, select {
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--panel);
+    .btn-success {
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, var(--danger), #dc2626);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-sm {
+      padding: 10px 16px;
+      font-size: 0.85rem;
+    }
+
+    .btn-lg {
+      padding: 18px 32px;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
       color: var(--text);
-      outline: none;
-      transition: border-color .2s ease, box-shadow .2s ease;
-      box-shadow: var(--shadow-sm) inset;
+      margin-bottom: 8px;
     }
-    input:focus, select:focus { border-color: var(--brand); box-shadow: 0 0 0 4px var(--ring); }
-    input::placeholder { color: var(--muted); }
 
-    /* Layout Helpers */
-    .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin: 10px 0 }
-    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap:14px }
-    .muted { color: var(--muted); font-size: .92em }
-    .ok { color: var(--success) } .err { color: var(--danger) }
+    .form-input, .form-select {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      align-items: end;
+    }
 
     /* Cards */
     .card {
-      border: 1px solid var(--border);
-      border-radius: var(--card-radius);
-      padding: 14px;
-      background: var(--panel);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: var(--radius);
+      padding: 40px;
       box-shadow: var(--shadow);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .card h2 { margin: 0 0 6px 0; font-size: 1.05rem }
-    .section { display:grid; gap:16px }
 
-    /* Fix buyer card overflow caused by reservationId input */
-    .card .row { width: 100%; }
-    .card .row > * { min-width: 0; }            
-    .card .row .rid {
-      flex: 1 1 260px;                          
-      width: 100%;                              
-      max-width: 100%;
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
     }
-    .card .row .pay { flex: 0 0 auto; }         
 
-    /* Tabs */
-    .tabs { display:flex; gap:10px; }
-    .tab {
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--tab-border);
-      background: var(--tab-bg);
-      cursor: pointer;
-      user-select:none;
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+      border-color: rgba(14, 165, 233, 0.3);
     }
-    .tab.active { background: var(--tab-active-bg); color: var(--tab-active-fg); border-color: transparent; box-shadow: var(--shadow) }
 
-    /* Tables */
-    table { border-collapse: collapse; width:100%; overflow:hidden; border-radius: 12px; }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--primary-light), rgba(14, 165, 233, 0.2));
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.1);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .card-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Event Cards */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 32px;
+      margin-top: 32px;
+    }
+
+    .event-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.4s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .event-header {
+      padding: 32px;
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(16, 185, 129, 0.05));
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .event-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .event-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .event-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .event-meta-item i {
+      color: var(--primary);
+    }
+
+    .event-body {
+      padding: 32px;
+    }
+
+    .booking-section {
+      background: linear-gradient(135deg, rgba(248, 250, 252, 0.8), rgba(240, 253, 244, 0.8));
+      border-radius: var(--radius-sm);
+      padding: 28px;
+      margin-top: 20px;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .booking-title {
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+
+    /* Admin Grid */
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    /* Table */
+    .table-container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-top: 32px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: linear-gradient(135deg, var(--bg-secondary), rgba(14, 165, 233, 0.05));
+    }
+
     thead th {
-      background: linear-gradient(180deg, #f6f7f9, #f1f2f4);
-      color:#3b3f45;
-      border-bottom:1px solid var(--border);
+      padding: 20px;
+      color: var(--text);
+      font-weight: 700;
+      text-align: left;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border);
     }
-    @media (prefers-color-scheme: dark){
-      thead th { background: linear-gradient(180deg, #14181e, #11151a); color: #cfd3da; }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border-light);
+      transition: all 0.3s ease;
     }
-    td, th { border: 1px solid var(--border); padding: 10px 12px; text-align:left; }
-    tbody tr:nth-child(odd){ background: var(--table-stripe); }
-    tbody tr:hover{ outline: 2px solid var(--ring); }
 
-    /* Flash */
-    #flash {
-      position:sticky; top:64px; left:0; right:0; z-index:9999;
-      background: color-mix(in oklab, var(--success) 10%, var(--panel));
-      border: 1px solid color-mix(in oklab, var(--success) 40%, var(--border));
-      color: color-mix(in oklab, var(--success) 70%, var(--text));
-      padding:10px 14px; margin:12px auto; border-radius:12px; display:none;
-      max-width: 1200px; box-shadow: var(--shadow);
-      animation: flash-in .25s ease-out;
+    tbody tr:hover {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.03), rgba(16, 185, 129, 0.03));
     }
-    @keyframes flash-in { from { opacity:0; transform: translateY(-4px);} to { opacity:1; transform: translateY(0);} }
 
-    /* Header actions */
-    .top-actions { margin-left:auto; display:flex; gap:8px; align-items:center }
-    #btnLogout { margin:0 }
+    tbody td {
+      padding: 20px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
 
-    /* Page headings */
-    .page-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin: 18px 0 12px }
-    h1 { font-size: 1.6rem; margin: 0 }
-    .subtitle { color:var(--muted); font-weight:500 }
+    tbody input {
+      background: rgba(255, 255, 255, 0.8);
+      border: 2px solid var(--border);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      width: 100%;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
 
-    /* Fine-tune small screens */
-    @media (max-width: 520px){
-      .topbar__inner{ padding: 12px 16px; }
-      .container{ padding: 16px; }
-      .grid{ grid-template-columns: 1fr; }
-      .row{ gap:8px }
+    tbody input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: white;
+      transform: translateY(-1px);
+    }
+
+    /* Status badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 25px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .status-success {
+      background: linear-gradient(135deg, var(--secondary-light), rgba(16, 185, 129, 0.2));
+      color: var(--secondary-dark);
+    }
+
+    .status-warning {
+      background: linear-gradient(135deg, var(--warning-light), rgba(245, 158, 11, 0.2));
+      color: #92400e;
+    }
+
+    .status-danger {
+      background: linear-gradient(135deg, var(--danger-light), rgba(239, 68, 68, 0.2));
+      color: #991b1b;
+    }
+
+    /* Alerts */
+    .alert {
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      margin: 20px 0;
+      border-left: 4px solid;
+      backdrop-filter: blur(10px);
+    }
+
+    .alert-success {
+      background: linear-gradient(135deg, rgba(209, 250, 229, 0.8), rgba(167, 243, 208, 0.8));
+      color: var(--secondary-dark);
+      border-left-color: var(--secondary);
+    }
+
+    .alert-danger {
+      background: linear-gradient(135deg, rgba(254, 226, 226, 0.8), rgba(252, 165, 165, 0.8));
+      color: #991b1b;
+      border-left-color: var(--danger);
+    }
+
+    .alert-warning {
+      background: linear-gradient(135deg, rgba(254, 243, 199, 0.8), rgba(253, 230, 138, 0.8));
+      color: #92400e;
+      border-left-color: var(--warning);
+    }
+
+    /* Toast notifications */
+    .toast {
+      position: fixed;
+      top: 120px;
+      right: 32px;
+      max-width: 450px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-left: 4px solid var(--secondary);
+      border-radius: var(--radius-sm);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+      display: none;
+      animation: slideInRight 0.4s ease-out;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Loading state */
+    .loading {
+      position: relative;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--primary-light);
+      border-top: 3px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Empty states */
+    .empty-state {
+      text-align: center;
+      padding: 100px 40px;
+      color: var(--text-muted);
+    }
+
+    .empty-state-icon {
+      font-size: 5rem;
+      margin-bottom: 20px;
+      opacity: 0.6;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .empty-state h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .app-container {
+        padding: 20px;
+      }
+
+      .header {
+        padding: 24px 28px;
+        border-radius: var(--radius);
+      }
+
+      .header-content {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .brand {
+        align-self: flex-start;
+      }
+
+      .nav-tabs {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 28px;
+      }
+
+      .event-header {
+        padding: 24px;
+      }
+
+      .event-body {
+        padding: 24px;
+      }
+
+      .booking-section {
+        padding: 20px;
+      }
+    }
+
+    /* Utility classes */
+    .text-center { text-align: center; }
+    .text-success { color: var(--secondary); }
+    .text-danger { color: var(--danger); }
+    .text-warning { color: var(--warning); }
+    .text-muted { color: var(--text-muted); }
+    .mb-0 { margin-bottom: 0; }
+    .mt-4 { margin-top: 1.5rem; }
+    .hidden { display: none; }
+
+    /* Additional enhancements */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
     }
   </style>
 </head>
 <body>
-  <!-- Top bar -->
-  <div class="topbar">
-    <div class="topbar__inner">
-      <div class="brand">
-        <span class="brand__dot" aria-hidden="true"></span>
-        <div>RuhuTickets <small>Demo</small></div>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="brand">
+          <div class="brand-icon floating">
+            <i class="fas fa-ticket-alt"></i>
+          </div>
+          <div class="brand-text">
+            <h1>E-Ticket Pro</h1>
+            <p>Professional Event Management</p>
+          </div>
+        </div>
+        
+        <nav class="nav-tabs">
+          <button id="tab-buyer" class="nav-tab">
+            <i class="fas fa-shopping-cart"></i>
+            Buy Tickets
+          </button>
+          <button id="tab-admin" class="nav-tab">
+            <i class="fas fa-cog"></i>
+            Admin Panel
+          </button>
+        </nav>
+        
+        <button id="btnLogout" class="btn btn-secondary">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout
+        </button>
       </div>
-      <div class="tabs" style="margin-left:12px">
-        <div id="tab-buyer" class="tab">User</div>
-        <div id="tab-admin" class="tab">Admin</div>
+    </header>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Buyer Section -->
+    <main id="buyer-section" class="section">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div>
+            <div class="card-title gradient-text">Available Events</div>
+            <div class="card-subtitle">Browse and book tickets for upcoming events</div>
+          </div>
+        </div>
+        <div id="events-container" class="events-grid"></div>
       </div>
-      <div class="top-actions">
-        <button id="btnLogout" class="btn-outline">Log Out</button>
+    </main>
+
+    <!-- Admin Section -->
+    <main id="admin-section" class="section hidden">
+      <!-- Create Forms -->
+      <div class="admin-grid">
+        <!-- Create Event -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <i class="fas fa-plus-circle"></i>
+            </div>
+            <div>
+              <div class="card-title gradient-text">Create Event</div>
+              <div class="card-subtitle">Add a new event to the system</div>
+            </div>
+          </div>
+          
+          <form id="create-event-form">
+            <div class="form-group">
+              <label class="form-label" for="event-name">Event Name</label>
+              <input type="text" id="event-name" class="form-input" placeholder="Enter event name" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="event-venue">Venue</label>
+              <input type="text" id="event-venue" class="form-input" placeholder="Enter venue location" required>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="event-start">Start Date & Time</label>
+                <input type="datetime-local" id="event-start" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="event-end">End Date & Time</label>
+                <input type="datetime-local" id="event-end" class="form-input" required>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-lg">
+              <i class="fas fa-plus"></i>
+              Create Event
+            </button>
+            <div id="event-status" class="mt-4"></div>
+          </form>
+        </div>
+
+        <!-- Create Ticket Type -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <i class="fas fa-tags"></i>
+            </div>
+            <div>
+              <div class="card-title gradient-text">Add Ticket Types</div>
+              <div class="card-subtitle">Configure pricing and availability</div>
+            </div>
+          </div>
+          
+          <form id="create-ticket-form">
+            <div class="form-group">
+              <label class="form-label" for="ticket-event">Select Event</label>
+              <select id="ticket-event" class="form-select" required>
+                <option value="">Choose an event</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="ticket-name">Ticket Type Name</label>
+              <input type="text" id="ticket-name" class="form-input" placeholder="e.g., VIP, General, Student" required>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="ticket-price">Price (cents)</label>
+                <input type="number" id="ticket-price" class="form-input" placeholder="e.g., 5000 for $50.00" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ticket-currency">Currency</label>
+                <input type="text" id="ticket-currency" class="form-input" value="LKR" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ticket-quantity">Quantity</label>
+                <input type="number" id="ticket-quantity" class="form-input" placeholder="Available tickets" required>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-lg">
+              <i class="fas fa-plus"></i>
+              Add Ticket Type
+            </button>
+            <div id="ticket-status" class="mt-4"></div>
+          </form>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Flash message -->
-  <div id="flash"></div>
-
-  <!-- Main -->
-  <div class="container">
-    <div class="page-head">
-      <h1>Events & Management</h1>
-      <div class="subtitle">Simple, fast ticketing</div>
-    </div>
-
-    <div id="buyer" class="section"></div>
-    <div id="admin" class="section" style="display:none"></div>
+      <!-- Events Management -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fas fa-list"></i>
+          </div>
+          <div>
+            <div class="card-title gradient-text">Manage Events</div>
+            <div class="card-subtitle">View and edit existing events</div>
+          </div>
+          <button id="refresh-events" class="btn btn-secondary" style="margin-left: auto;">
+            <i class="fas fa-sync-alt"></i>
+            Refresh
+          </button>
+        </div>
+        <div id="events-table"></div>
+      </div>
+    </main>
   </div>
 
   <script>
+    // Global variables
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+      window.location.href = 'login.html';
+      throw new Error('Redirecting to login');
+    }
+
+    function parseJwt(t) {
+      const p = t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+      return JSON.parse(atob(p));
+    }
+
+    const claims = parseJwt(token);
+    const role = claims.role || '';
+
+    // Hide tabs based on role
+    if (role === 'buyer') {
+      document.getElementById('tab-admin').style.display = 'none';
+    } else if (role !== 'admin') {
+      document.getElementById('tab-buyer').style.display = 'none';
+    }
+
+    // API helper
+    const api = async (endpoint, options = {}) => {
+      try {
+        const response = await fetch(endpoint, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+            ...(options.headers || {})
+          },
+          ...options
+        });
+
+        const contentType = response.headers.get('content-type') || '';
+        const data = contentType.includes('application/json') 
+          ? await response.json() 
+          : await response.text();
+
+        if (!response.ok) {
+          throw Object.assign(
+            new Error(typeof data === 'string' ? data : (data.error || `HTTP ${response.status}`)),
+            { status: response.status, data }
+          );
+        }
+
+        return data;
+      } catch (error) {
+        console.error('API Error:', error);
+        throw error;
+      }
+    };
+
+    // Utility functions
+    const createElement = (html) => {
+      const div = document.createElement('div');
+      div.innerHTML = html.trim();
+      return div.firstChild;
+    };
+
+    const showToast = (message, type = 'success') => {
+      const toast = document.getElementById('toast');
+      const icon = type === 'success' ? 'check-circle' : 'exclamation-triangle';
+      const borderColor = type === 'success' ? 'var(--secondary)' : 'var(--danger)';
+      
+      toast.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <i class="fas fa-${icon}" style="color: ${borderColor};"></i>
+          <span>${message}</span>
+        </div>
+      `;
+      toast.style.borderLeftColor = borderColor;
+      toast.style.display = 'block';
+      
+      clearTimeout(showToast.timeout);
+      showToast.timeout = setTimeout(() => {
+        toast.style.display = 'none';
+      }, 5000);
+    };
+
+    const setLoading = (element, loading = true) => {
+      if (loading) {
+        element.classList.add('loading');
+        element.disabled = true;
+      } else {
+        element.classList.remove('loading');
+        element.disabled = false;
+      }
+    };
+
+    const displayStatus = (element, message, type = 'info') => {
+      const className = type === 'success' ? 'alert-success' : 
+                       type === 'error' ? 'alert-danger' : 
+                       type === 'warning' ? 'alert-warning' : 'text-muted';
+      
+      element.innerHTML = `<div class="alert ${className}">${message}</div>`;
+    };
+
+    // Tab switching
+    const tabBuyer = document.getElementById('tab-buyer');
+    const tabAdmin = document.getElementById('tab-admin');
+    const buyerSection = document.getElementById('buyer-section');
+    const adminSection = document.getElementById('admin-section');
+
+    tabBuyer.onclick = () => {
+      tabBuyer.classList.add('active');
+      tabAdmin.classList.remove('active');
+      buyerSection.classList.remove('hidden');
+      adminSection.classList.add('hidden');
+    };
+
+    tabAdmin.onclick = () => {
+      tabAdmin.classList.add('active');
+      tabBuyer.classList.remove('active');
+      adminSection.classList.remove('hidden');
+      buyerSection.classList.add('hidden');
+    };
+
+    // Initialize based on role
+    if (role === 'admin') {
+      tabAdmin.click();
+    } else {
+      tabBuyer.click();
+    }
+
+    // Logout handler
     document.getElementById('btnLogout').onclick = () => {
       localStorage.removeItem('jwt');
       window.location.href = 'login.html';
     };
 
-    const buyerEl = document.getElementById('buyer');
-    const adminEl = document.getElementById('admin');
-    const el      = html => {
-      const d = document.createElement('div');
-      d.innerHTML = html.trim();
-      return d.firstChild;
-    };
+    // Buyer functionality
+    async function renderBuyerSection() {
+      const eventsContainer = document.getElementById('events-container');
+      eventsContainer.innerHTML = '<div class="text-center text-muted">Loading events...</div>';
 
-    function errToText(e){
-      const data = e?.data?.error ?? e?.data ?? e;
-      if (!data) return 'Unknown error';
-      if (typeof data === 'string') return data;
-      if (Array.isArray(data)) return data.map(errToText).join(', ');
-      if (data.message) return data.message;
-      try { return JSON.stringify(data); } catch { return String(data); }
-    }
-
-
-    // —— enforce JWT presence & parse role —— 
-    const token = localStorage.getItem('jwt');
-    if (!token) {
-      // no token → back to login
-      window.location.href = 'login.html';
-      throw new Error('Redirecting to login');
-    }
-    function parseJwt(t) {
-      const p = t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');
-      return JSON.parse(atob(p));
-    }
-    const claims = parseJwt(token);
-    const role   = claims.role || '';
-
-    if (role === 'buyer') {
-      document.getElementById('tab-admin').style.display = 'none';
-    } else {
-      document.getElementById('tab-buyer').style.display = 'none';
-    }
-
-    const api = (p, opt = {}) => fetch(p, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token,
-        ...(opt.headers||{})
-      },
-      ...opt
-    }).then(async r => {
-      const ct   = r.headers.get('content-type') || '';
-      const data = ct.includes('application/json') ? await r.json() : await r.text();
-      if (!r.ok) throw Object.assign(
-        new Error(typeof data === 'string' ? data : (data.error || 'HTTP ' + r.status)),
-        { status: r.status, data }
-      );
-      return data;
-    });
-
-    const tabBuyer = document.getElementById('tab-buyer');
-    const tabAdmin = document.getElementById('tab-admin');
-    tabBuyer.onclick = () => {
-      tabBuyer.classList.add('active');
-      tabAdmin.classList.remove('active');
-      buyerEl.style.display  = 'grid';
-      adminEl.style.display  = 'none';
-    };
-    tabAdmin.onclick = () => {
-      tabAdmin.classList.add('active');
-      tabBuyer.classList.remove('active');
-      adminEl.style.display = 'grid';
-      buyerEl.style.display = 'none';
-    };
-
-    if (role === 'admin') tabAdmin.click();
-    else                  tabBuyer.click();
-
-    renderBuyer();
-    renderAdmin();
-
-    async function renderBuyer(){
-      buyerEl.innerHTML = '';
-      let events = [];
-      try { events = await api('/api/v1/events'); } catch (_) {}
-      if (!Array.isArray(events) || !events.length) {
-        buyerEl.appendChild(el(`<div class="card">No events yet. Create one in Admin tab.</div>`));
-        return;
-      }
-      const wrap = el(`<div class="grid"></div>`);
-      buyerEl.appendChild(wrap);
-
-      for (const e of events) {
-        const card = el(`
-          <div class="card">
-            <h2>${e.name}</h2>
-            <div class="muted">${new Date(e.start_time).toLocaleString()} @ ${e.venue}</div>
-            <div class="row">
-              <select class="tt"></select>
-              <input class="qty" type="number" min="1" value="2" />
-              <button class="reserve btn-primary">Reserve</button>
-              <span class="reserveOut muted"></span>
+      try {
+        const events = await api('/api/v1/events');
+        
+        if (!Array.isArray(events) || events.length === 0) {
+          eventsContainer.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-state-icon">
+                <i class="fas fa-calendar-times"></i>
+              </div>
+              <h3>No Events Available</h3>
+              <p>There are no events scheduled at the moment. Check back later!</p>
             </div>
-            <div class="row">
-              <input class="rid" placeholder="reservationId" size="45" />
-              <button class="pay btn-primary">Pay & Commit</button>
-              <span class="payOut muted"></span>
-            </div>
-          </div>
-        `);
-        wrap.appendChild(card);
-
-        // load ticket types
-        try {
-          const sel   = card.querySelector('.tt');
-          sel.innerHTML = '';
-          const types = await api(`/api/v1/inventory/ticket-types?eventId=${encodeURIComponent(e.id)}`);
-          if (Array.isArray(types) && types.length) {
-            for (const t of types) {
-              const o = document.createElement('option');
-              o.value = t.id;
-              o.textContent = `${t.name} — ${(t.price_cents/100).toFixed(2)} ${t.currency} (left: ${t.total_qty - t.sold_qty})`;
-              sel.appendChild(o);
-            }
-          } else {
-            sel.appendChild(new Option('No ticket types',''));
-          }
-        } catch {
-          const out = card.querySelector('.reserveOut');
-          out.className = 'err';
-          out.textContent = 'Failed to load ticket types';
-        }
-
-        // reserve action
-        card.querySelector('.reserve').onclick = async () => {
-          const ticketTypeId = card.querySelector('.tt').value;
-          const qty          = +card.querySelector('.qty').value;
-          const out          = card.querySelector('.reserveOut');
-          out.className='muted'; out.textContent='Reserving...';
-          try {
-            const r = await api('/api/v1/inventory/reserve', {
-              method:'POST',
-              body: JSON.stringify({ ticketTypeId, qty })
-            });
-            out.className='ok';
-            out.textContent = `Reservation: ${r.reservationId} (expires in ${r.expiresInSeconds}s)`;
-            card.querySelector('.rid').value = r.reservationId;
-          } catch (e) {
-            out.className='err';
-            out.textContent = e.message || 'Reserve failed';
-          }
-        };
-
-        // pay action
-        card.querySelector('.pay').onclick = async () => {
-          const rid = card.querySelector('.rid').value.trim();
-          const out = card.querySelector('.payOut');
-          out.className='muted'; out.textContent='Paying...';
-          try {
-            const r    = await api('/api/v1/webhooks/payment/charge', {
-              method:'POST',
-              body: JSON.stringify({ reservationId: rid })
-            });
-            const info = r.reservation || {};
-            const when = info.start_time ? new Date(info.start_time).toLocaleString() : '';
-            const qty  = (info.qty ?? '').toString();
-            const type = info.ticket_type ? ` × ${info.ticket_type}` : '';
-            const evt  = info.event_name ? ` for ${info.event_name}` : '';
-            const line = info.event_name
-              ? `Booked ${qty}${type}${evt}${when ? ' — ' + when : ''}`
-              : (r.message || 'Payment successful');
-            out.className='ok';
-            out.textContent = '✅ ' + line;
-            showFlash('✅ ' + line);
-            renderBuyer();
-            renderAdmin();
-          } catch (e) {
-            out.className='err';
-            out.textContent = e.message || 'Payment failed';
-          }
-        };
-      }
-    }
-
-    // —— admin UI —— 
-    async function renderAdmin(){
-      adminEl.innerHTML = '';
-
-      // Create Event
-      const evCard = el(`
-        <div class="card">
-          <h2>Create Event</h2>
-          <div class="row">
-            <input id="name" placeholder="name" />
-            <input id="venue" placeholder="venue" />
-          </div>
-          <div class="row">
-            <input id="start" type="datetime-local" />
-            <input id="end"   type="datetime-local" />
-            <button id="createEv" class="btn-primary">Create</button>
-            <span id="evOut" class="muted"></span>
-          </div>
-        </div>
-      `);
-      adminEl.appendChild(evCard);
-
-      // Create Ticket Type
-      const ttCard = el(`
-        <div class="card">
-          <h2>Create Ticket Type</h2>
-          <div class="row">
-            <select id="eventSelect"></select>
-            <input id="tname" placeholder="name (VIP/General)" />
-          </div>
-          <div class="row">
-            <input id="price" type="number" placeholder="price cents (e.g., 50000)" />
-            <input id="cur"   value="LKR" size="6" />
-            <input id="qty"   type="number" placeholder="total qty" />
-            <button id="createTT" class="btn-primary">Add</button>
-            <span id="ttOut" class="muted"></span>
-          </div>
-        </div>
-      `);
-      adminEl.appendChild(ttCard);
-
-      // Manage Events table
-      const listCard = el(`
-        <div class="card">
-          <h2>Manage Events</h2>
-          <div class="row">
-            <button id="refreshEv" class="btn-outline">Refresh</button>
-          </div>
-          <div id="evList"></div>
-        </div>
-      `);
-      adminEl.appendChild(listCard);
-
-      async function loadEventsTable(){
-        const [rows, stats] = await Promise.all([
-          api('/api/v1/events'),
-          api('/api/v1/inventory/event-stats')
-        ]);
-        const sMap = Object.fromEntries(stats.map(s => [s.id,s]));
-
-        if (!rows.length) {
-          listCard.querySelector('#evList').innerHTML = '<div class="muted">No events yet.</div>';
+          `;
           return;
         }
 
-        listCard.querySelector('#evList').innerHTML = `
-          <table>
-            <thead>
-              <tr><th>name</th><th>venue</th><th>start</th><th>end</th><th>sold (by type)</th><th></th></tr>
-            </thead>
-            <tbody>
-              ${rows.map(r => {
-                const st = sMap[r.id]||{sold_total:0,by_type:[]};
-                const by = st.by_type.map(bt=>`${bt.name}: ${bt.sold}`).join(', ');
-                return `
-                  <tr data-id="${r.id}">
-                    <td><input class="en" value="${r.name}"/></td>
-                    <td><input class="ev" value="${r.venue}"/></td>
-                    <td><input class="es" type="datetime-local" value="${toLocalDT(r.start_time)}"/></td>
-                    <td><input class="ee" type="datetime-local" value="${toLocalDT(r.end_time)}"/></td>
-                    <td>${st.sold_total}${by?` (${by})`:''}</td>
-                    <td>
-                      <button class="save btn-primary">Save</button>
-                      <button class="del btn-danger">Delete</button>
-                    </td>
-                  </tr>`;
-              }).join('')}
-            </tbody>
-          </table>`;
-        // Save/Delete handlers
-        listCard.querySelectorAll('.save').forEach(btn=>{
-          btn.onclick = async ()=>{
-            const tr = btn.closest('tr'), id = tr.dataset.id;
-            const payload = {
-              name: tr.querySelector('.en').value,
-              venue: tr.querySelector('.ev').value,
-              start_time: new Date(tr.querySelector('.es').value).toISOString(),
-              end_time:   new Date(tr.querySelector('.ee').value).toISOString()
-            };
-            await api(`/api/v1/events/${id}`, { method:'PUT', body: JSON.stringify(payload) });
-            renderBuyer(); renderAdmin();
-          };
-        });
-        listCard.querySelectorAll('.del').forEach(btn=>{
-          btn.onclick = async ()=>{
-            const tr = btn.closest('tr'), id = tr.dataset.id;
-            if (!confirm('Delete this event and related data?')) return;
-            await api(`/api/v1/events/${id}`, { method:'DELETE' });
-            renderBuyer(); renderAdmin();
-          };
-        });
-      }
-      function toLocalDT(iso){
-        const d = new Date(iso), pad = n=>String(n).padStart(2,'0');
-        return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`
-             + `T${pad(d.getHours())}:${pad(d.getMinutes())}`;
-      }
+        eventsContainer.innerHTML = '';
+        
+        for (const event of events) {
+          const eventCard = createElement(`
+            <div class="event-card">
+              <div class="event-header">
+                <h3 class="event-title">${event.name}</h3>
+                <div class="event-meta">
+                  <div class="event-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    ${new Date(event.start_time).toLocaleDateString()}
+                  </div>
+                  <div class="event-meta-item">
+                    <i class="fas fa-clock"></i>
+                    ${new Date(event.start_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                  </div>
+                  <div class="event-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    ${event.venue}
+                  </div>
+                </div>
+              </div>
+              
+              <div class="event-body">
+                <div class="booking-section">
+                  <h4 class="booking-title">Book Your Tickets</h4>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Select Ticket Type</label>
+                    <select class="form-select ticket-type-select">
+                      <option value="">Loading ticket types...</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Quantity</label>
+                      <input type="number" class="form-input quantity-input" min="1" value="1">
+                    </div>
+                    <button class="btn btn-primary reserve-btn">
+                      <i class="fas fa-shopping-cart"></i>
+                      Reserve Tickets
+                    </button>
+                  </div>
+                  <div class="reserve-status"></div>
+                  
+                  <div class="form-row mt-4" style="border-top: 1px solid var(--border-light); padding-top: 20px;">
+                    <div class="form-group">
+                      <label class="form-label">Reservation ID</label>
+                      <input type="text" class="form-input reservation-id" placeholder="Enter your reservation ID">
+                    </div>
+                    <button class="btn btn-success pay-btn">
+                      <i class="fas fa-credit-card"></i>
+                      Complete Payment
+                    </button>
+                  </div>
+                  <div class="payment-status"></div>
+                </div>
+              </div>
+            </div>
+          `);
+          
+          eventsContainer.appendChild(eventCard);
 
-      listCard.querySelector('#refreshEv').onclick = loadEventsTable;
-      
-      await loadEventsTable();
-
-      // Reservations section
-      const resCard = el(`
-        <div class="card">
-          <h2>Reservations</h2>
-          <div class="row">
-            <select id="resEvent"><option value="">All events</option></select>
-            <button id="refreshRes" class="btn-outline">Refresh</button>
+          // Load ticket types for this event
+          await loadTicketTypes(event.id, eventCard);
+          
+          // Set up event handlers
+          setupEventHandlers(event.id, eventCard);
+        }
+      } catch (error) {
+        eventsContainer.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3>Error Loading Events</h3>
+            <p>Failed to load events: ${error.message}</p>
+            <button class="btn btn-primary mt-4" onclick="renderBuyerSection()">
+              <i class="fas fa-sync-alt"></i>
+              Try Again
+            </button>
           </div>
-          <div id="resTbl"></div>
-        </div>
-      `);
-      adminEl.appendChild(resCard);
+        `;
+      }
+    }
 
-      // fill event dropdowns
-      const evSel  = ttCard.querySelector('#eventSelect');
-      const resSel = resCard.querySelector('#resEvent');
-      (await api('/api/v1/events')||[]).forEach(ev=>{
-        evSel .appendChild(new Option(`${ev.name} @ ${ev.venue}`, ev.id));
-        resSel.appendChild(new Option(ev.name, ev.id));
+    async function loadTicketTypes(eventId, eventCard) {
+      const select = eventCard.querySelector('.ticket-type-select');
+      
+      try {
+        const ticketTypes = await api(`/api/v1/inventory/ticket-types?eventId=${encodeURIComponent(eventId)}`);
+        select.innerHTML = '';
+        
+        if (!Array.isArray(ticketTypes) || ticketTypes.length === 0) {
+          select.innerHTML = '<option value="">No ticket types available</option>';
+          return;
+        }
+        
+        select.innerHTML = '<option value="">Select a ticket type</option>';
+        ticketTypes.forEach(type => {
+          const available = type.total_qty - type.sold_qty;
+          const option = document.createElement('option');
+          option.value = type.id;
+          option.textContent = `${type.name} - ${(type.price_cents/100).toFixed(2)} ${type.currency} (${available} available)`;
+          option.disabled = available === 0;
+          select.appendChild(option);
+        });
+      } catch (error) {
+        select.innerHTML = '<option value="">Failed to load ticket types</option>';
+        displayStatus(eventCard.querySelector('.reserve-status'), 'Failed to load ticket types', 'error');
+      }
+    }
+
+    function setupEventHandlers(eventId, eventCard) {
+      const reserveBtn = eventCard.querySelector('.reserve-btn');
+      const payBtn = eventCard.querySelector('.pay-btn');
+      const ticketTypeSelect = eventCard.querySelector('.ticket-type-select');
+      const quantityInput = eventCard.querySelector('.quantity-input');
+      const reservationIdInput = eventCard.querySelector('.reservation-id');
+      const reserveStatus = eventCard.querySelector('.reserve-status');
+      const paymentStatus = eventCard.querySelector('.payment-status');
+
+      // Reserve tickets
+      reserveBtn.onclick = async () => {
+        const ticketTypeId = ticketTypeSelect.value;
+        const quantity = parseInt(quantityInput.value);
+
+        if (!ticketTypeId) {
+          displayStatus(reserveStatus, 'Please select a ticket type', 'error');
+          return;
+        }
+
+        if (!quantity || quantity < 1) {
+          displayStatus(reserveStatus, 'Please enter a valid quantity', 'error');
+          return;
+        }
+
+        setLoading(reserveBtn, true);
+        reserveStatus.innerHTML = '<div class="text-muted">Processing reservation...</div>';
+
+        try {
+          const reservation = await api('/api/v1/inventory/reserve', {
+            method: 'POST',
+            body: JSON.stringify({ ticketTypeId, qty: quantity })
+          });
+
+          displayStatus(reserveStatus, `
+            <i class="fas fa-check-circle"></i>
+            Reservation successful! 
+            <br><strong>ID:</strong> ${reservation.reservationId}
+            <br><small>Expires in ${reservation.expiresInSeconds} seconds</small>
+          `, 'success');
+
+          reservationIdInput.value = reservation.reservationId;
+        } catch (error) {
+          displayStatus(reserveStatus, `Reservation failed: ${error.message}`, 'error');
+        } finally {
+          setLoading(reserveBtn, false);
+        }
+      };
+
+      // Complete payment
+      payBtn.onclick = async () => {
+        const reservationId = reservationIdInput.value.trim();
+
+        if (!reservationId) {
+          displayStatus(paymentStatus, 'Please enter a reservation ID', 'error');
+          return;
+        }
+
+        setLoading(payBtn, true);
+        paymentStatus.innerHTML = '<div class="text-muted">Processing payment...</div>';
+
+        try {
+          const result = await api('/api/v1/webhooks/payment/charge', {
+            method: 'POST',
+            body: JSON.stringify({ reservationId })
+          });
+
+          const reservation = result.reservation || {};
+          const ticketCount = reservation.qty || 1;
+          const eventName = reservation.event_name || 'Event';
+          const ticketType = reservation.ticket_type || '';
+          
+          const successMessage = `
+            Payment successful! 
+            <br><strong>Booked:</strong> ${ticketCount} ticket${ticketCount > 1 ? 's' : ''} ${ticketType ? `(${ticketType})` : ''} for ${eventName}
+            ${reservation.start_time ? `<br><strong>Date:</strong> ${new Date(reservation.start_time).toLocaleString()}` : ''}
+          `;
+
+          displayStatus(paymentStatus, successMessage, 'success');
+          showToast(`Successfully booked ${ticketCount} ticket${ticketCount > 1 ? 's' : ''} for ${eventName}!`);
+
+          // Clear form
+          reservationIdInput.value = '';
+          reserveStatus.innerHTML = '';
+          
+          // Refresh data
+          setTimeout(() => {
+            renderBuyerSection();
+            if (role === 'admin') renderAdminSection();
+          }, 2000);
+
+        } catch (error) {
+          displayStatus(paymentStatus, `Payment failed: ${error.message}`, 'error');
+        } finally {
+          setLoading(payBtn, false);
+        }
+      };
+    }
+
+    // Admin functionality
+    async function renderAdminSection() {
+      if (role !== 'admin') return;
+
+      await loadEventDropdowns();
+      await loadEventsTable();
+    }
+
+    async function loadEventDropdowns() {
+      try {
+        const events = await api('/api/v1/events');
+        const ticketEventSelect = document.getElementById('ticket-event');
+        
+        ticketEventSelect.innerHTML = '<option value="">Choose an event</option>';
+        
+        if (Array.isArray(events)) {
+          events.forEach(event => {
+            const option = document.createElement('option');
+            option.value = event.id;
+            option.textContent = `${event.name} @ ${event.venue}`;
+            ticketEventSelect.appendChild(option);
+          });
+        }
+      } catch (error) {
+        console.error('Failed to load events for dropdowns:', error);
+      }
+    }
+
+    async function loadEventsTable() {
+      const eventsTable = document.getElementById('events-table');
+      
+      try {
+        const [events, stats] = await Promise.all([
+          api('/api/v1/events'),
+          api('/api/v1/inventory/event-stats').catch(() => [])
+        ]);
+
+        if (!Array.isArray(events) || events.length === 0) {
+          eventsTable.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-state-icon">
+                <i class="fas fa-calendar-plus"></i>
+              </div>
+              <h3>No Events Created</h3>
+              <p>Create your first event using the form above.</p>
+            </div>
+          `;
+          return;
+        }
+
+        const statsMap = {};
+        if (Array.isArray(stats)) {
+          stats.forEach(stat => {
+            statsMap[stat.id] = stat;
+          });
+        }
+
+        const tableHtml = `
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Event Name</th>
+                  <th>Venue</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Tickets Sold</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${events.map(event => {
+                  const stat = statsMap[event.id] || { sold_total: 0, by_type: [] };
+                  const salesBreakdown = stat.by_type
+                    .map(type => `${type.name}: ${type.sold}`)
+                    .join(', ');
+                  
+                  return `
+                    <tr data-event-id="${event.id}">
+                      <td>
+                        <input type="text" class="event-name" value="${event.name}" />
+                      </td>
+                      <td>
+                        <input type="text" class="event-venue" value="${event.venue}" />
+                      </td>
+                      <td>
+                        <input type="datetime-local" class="event-start" 
+                               value="${formatDateForInput(event.start_time)}" />
+                      </td>
+                      <td>
+                        <input type="datetime-local" class="event-end" 
+                               value="${formatDateForInput(event.end_time)}" />
+                      </td>
+                      <td>
+                        <div class="status-badge status-success">${stat.sold_total} total</div>
+                        ${salesBreakdown ? `<small style="color: var(--text-muted); display: block; margin-top: 4px;">${salesBreakdown}</small>` : ''}
+                      </td>
+                      <td>
+                        <button class="btn btn-primary btn-sm save-event-btn" style="margin-right: 8px;">
+                          <i class="fas fa-save"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm delete-event-btn">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+
+        eventsTable.innerHTML = tableHtml;
+        setupEventTableHandlers();
+
+      } catch (error) {
+        eventsTable.innerHTML = `
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle"></i>
+            Failed to load events: ${error.message}
+          </div>
+        `;
+      }
+    }
+
+    function formatDateForInput(isoString) {
+      const date = new Date(isoString);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+
+    function setupEventTableHandlers() {
+      // Save event handlers
+      document.querySelectorAll('.save-event-btn').forEach(btn => {
+        btn.onclick = async () => {
+          const row = btn.closest('tr');
+          const eventId = row.dataset.eventId;
+          const nameInput = row.querySelector('.event-name');
+          const venueInput = row.querySelector('.event-venue');
+          const startInput = row.querySelector('.event-start');
+          const endInput = row.querySelector('.event-end');
+
+          const eventData = {
+            name: nameInput.value.trim(),
+            venue: venueInput.value.trim(),
+            start_time: new Date(startInput.value).toISOString(),
+            end_time: new Date(endInput.value).toISOString()
+          };
+
+          if (!eventData.name || !eventData.venue) {
+            showToast('Please fill in all required fields', 'error');
+            return;
+          }
+
+          if (new Date(eventData.end_time) <= new Date(eventData.start_time)) {
+            showToast('End time must be after start time', 'error');
+            return;
+          }
+
+          setLoading(btn, true);
+
+          try {
+            await api(`/api/v1/events/${eventId}`, {
+              method: 'PUT',
+              body: JSON.stringify(eventData)
+            });
+
+            showToast('Event updated successfully!');
+            await loadEventsTable();
+            await renderBuyerSection();
+            await loadEventDropdowns();
+          } catch (error) {
+            showToast(`Failed to update event: ${error.message}`, 'error');
+          } finally {
+            setLoading(btn, false);
+          }
+        };
       });
 
-      // create event handler
-      evCard.querySelector('#createEv').onclick = async () => {
-        const name  = evCard.querySelector('#name').value.trim();
-        const venue = evCard.querySelector('#venue').value.trim();
-        const start = evCard.querySelector('#start').value;
-        const end   = evCard.querySelector('#end').value;
-        const out   = evCard.querySelector('#evOut');
+      // Delete event handlers
+      document.querySelectorAll('.delete-event-btn').forEach(btn => {
+        btn.onclick = async () => {
+          const row = btn.closest('tr');
+          const eventId = row.dataset.eventId;
+          const eventName = row.querySelector('.event-name').value;
 
-        out.className = 'muted';
-        out.textContent = 'Creating...';
+          if (!confirm(`Are you sure you want to delete "${eventName}" and all related data? This action cannot be undone.`)) {
+            return;
+          }
 
-        if (!name || !venue || !start || !end) {
-          out.className = 'err';
-          out.textContent = 'Please fill name, venue, start, and end.';
-          return;
-        }
+          setLoading(btn, true);
 
-        const s = new Date(start);
-        const e = new Date(end);
-        if (isNaN(+s) || isNaN(+e) || e <= s) {
-          out.className = 'err';
-          out.textContent = 'End time must be after start time.';
-          return;
-        }
-
-        try {
-          const r = await api('/api/v1/events', {
-            method: 'POST',
-            body: JSON.stringify({
-              name, venue,
-              start_time: s.toISOString(),
-              end_time:   e.toISOString()
-            })
-          });
-          out.className = 'ok';
-          out.textContent = 'Created: ' + r.id;
-
-          // evSel / resSel must already be defined above this handler
-          evSel.appendChild(new Option(`${r.name} @ ${r.venue}`, r.id));
-          resSel.appendChild(new Option(r.name, r.id));
-          evSel.value = r.id;
-
-          renderBuyer();
-        } catch (e) {
-          out.className = 'err';
-          out.textContent = errToText(e);
-        }
-      };
-
-      // create ticket type
-      ttCard.querySelector('#createTT').onclick = async ()=>{
-        const payload = {
-          event_id:    evSel.value,
-          name:        ttCard.querySelector('#tname').value.trim(),
-          price_cents: +ttCard.querySelector('#price').value,
-          currency:    ttCard.querySelector('#cur').value.trim(),
-          total_qty:   +ttCard.querySelector('#qty').value
+          try {
+            await api(`/api/v1/events/${eventId}`, { method: 'DELETE' });
+            showToast('Event deleted successfully!');
+            await loadEventsTable();
+            await renderBuyerSection();
+            await loadEventDropdowns();
+          } catch (error) {
+            showToast(`Failed to delete event: ${error.message}`, 'error');
+          } finally {
+            setLoading(btn, false);
+          }
         };
-        const out = ttCard.querySelector('#ttOut');
-        out.className='muted'; out.textContent='Adding...';
-        try {
-          const r = await api('/api/v1/inventory/ticket-types',{
-            method:'POST',
-            body: JSON.stringify(payload)
-          });
-          out.className='ok';
-          out.textContent = 'Added: '+r.id;
-          renderBuyer();
-        } catch(e) {
-          out.className='err';
-          out.textContent = errToText(e);
-        }
+      });
+    }
+
+    // Form handlers
+    document.getElementById('create-event-form').onsubmit = async (e) => {
+      e.preventDefault();
+      
+      const form = e.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const statusEl = document.getElementById('event-status');
+      
+      const eventData = {
+        name: document.getElementById('event-name').value.trim(),
+        venue: document.getElementById('event-venue').value.trim(),
+        start_time: new Date(document.getElementById('event-start').value).toISOString(),
+        end_time: new Date(document.getElementById('event-end').value).toISOString()
       };
 
-      // load reservations
-      async function loadRes(){
-        const chosen = resSel.value;
-        let rows = [];
-        try {
-          rows = await api(`/api/v1/inventory/reservations${chosen ? ('?eventId='+encodeURIComponent(chosen)) : ''}`);
-        } catch(e) {
-          resCard.querySelector('#resTbl').innerHTML = `<div class="err">${errToText(e)}</div>`;
-          return;
-        }
-        if (!rows.length) {
-          resCard.querySelector('#resTbl').innerHTML = `<div class="muted">No reservations yet.</div>`;
-          return;
-        }
-        const html = `
-          <table>
-            <thead>
-              <tr><th>id</th><th>event</th><th>booked time</th><th>tickets</th><th>status</th></tr>
-            </thead>
-            <tbody>
-              ${rows.map(r=>`
-                <tr>
-                  <td>${r.id}</td>
-                  <td>${r.event_name}</td>
-                  <td>${r.booked_at?new Date(r.booked_at).toLocaleString():''}</td>
-                  <td>${r.qty}${r.ticket_type?` (${r.ticket_type})`:''}</td>
-                  <td>${r.status}</td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-        `;
-        resCard.querySelector('#resTbl').innerHTML = html;
+      if (new Date(eventData.end_time) <= new Date(eventData.start_time)) {
+        displayStatus(statusEl, 'End time must be after start time', 'error');
+        return;
       }
-      resCard.querySelector('#refreshRes').onclick = loadRes;
-      resSel.onchange = loadRes;
-      loadRes();
-    }
- 
-    function showFlash(msg){
-      const box = document.getElementById('flash');
-      box.textContent = msg;
-      box.style.display = 'block';
-      clearTimeout(showFlash._t);
-      showFlash._t = setTimeout(()=> box.style.display='none', 6000);
+
+      setLoading(submitBtn, true);
+      statusEl.innerHTML = '<div class="text-muted">Creating event...</div>';
+
+      try {
+        const newEvent = await api('/api/v1/events', {
+          method: 'POST',
+          body: JSON.stringify(eventData)
+        });
+
+        displayStatus(statusEl, 'Event created successfully!', 'success');
+        showToast('Event created successfully!');
+        
+        // Reset form
+        form.reset();
+        
+        // Refresh data
+        await loadEventDropdowns();
+        await loadEventsTable();
+        await renderBuyerSection();
+        
+        // Select the new event in ticket form
+        document.getElementById('ticket-event').value = newEvent.id;
+
+      } catch (error) {
+        displayStatus(statusEl, `Failed to create event: ${error.message}`, 'error');
+      } finally {
+        setLoading(submitBtn, false);
+      }
+    };
+
+    document.getElementById('create-ticket-form').onsubmit = async (e) => {
+      e.preventDefault();
+      
+      const form = e.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const statusEl = document.getElementById('ticket-status');
+      
+      const ticketData = {
+        event_id: document.getElementById('ticket-event').value,
+        name: document.getElementById('ticket-name').value.trim(),
+        price_cents: parseInt(document.getElementById('ticket-price').value),
+        currency: document.getElementById('ticket-currency').value.trim(),
+        total_qty: parseInt(document.getElementById('ticket-quantity').value)
+      };
+
+      if (!ticketData.event_id) {
+        displayStatus(statusEl, 'Please select an event', 'error');
+        return;
+      }
+
+      setLoading(submitBtn, true);
+      statusEl.innerHTML = '<div class="text-muted">Adding ticket type...</div>';
+
+      try {
+        await api('/api/v1/inventory/ticket-types', {
+          method: 'POST',
+          body: JSON.stringify(ticketData)
+        });
+
+        displayStatus(statusEl, 'Ticket type added successfully!', 'success');
+        showToast('Ticket type added successfully!');
+        
+        // Reset form
+        form.reset();
+        
+        // Refresh buyer section to show new ticket types
+        await renderBuyerSection();
+
+      } catch (error) {
+        displayStatus(statusEl, `Failed to add ticket type: ${error.message}`, 'error');
+      } finally {
+        setLoading(submitBtn, false);
+      }
+    };
+
+    // Refresh events button
+    document.getElementById('refresh-events').onclick = () => {
+      loadEventsTable();
+      renderBuyerSection();
+    };
+
+    // Initialize the app
+    renderBuyerSection();
+    if (role === 'admin') {
+      renderAdminSection();
     }
   </script>
 </body>
